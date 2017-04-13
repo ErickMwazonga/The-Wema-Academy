@@ -1,0 +1,59 @@
+{% extends "thewema/base.html" %}
+{% block title %}View Student{{ block.super }}{% endblock %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="container">
+        {% if student %}
+        <div class="col-md-3">
+            <img src="{{ student.image.url }}" class="img-circle" alt="{% static 'thewema/images/next.jpg' %}" width="200" height="200">
+        </div>
+        <div class="col-md-9">
+            <table class="table table-striped ">
+                <thead>
+                    <tr>
+                        <th>Field</th>
+                        <th>Data</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Admission Number</td>
+                        <td>{{ student.admin_no }}</td>
+                    </tr>
+                    <tr>
+                        <td>First Name</td>
+                        <td>{{ student.first_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Middle Name</td>
+                        <td>{{ student.middle_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Surname</td>
+                        <td>{{ student.surname }}</td>
+                    </tr>
+                    <tr>
+                        <td>Gender</td>
+                        <td>{{ student.gender }}</td>
+                    </tr>
+                    <tr>
+                        <td>Date of Birth</td>
+                        <td>{{ student.dob }}</td>
+                    </tr>
+                    <tr>
+                        <td>Class</td>
+                        <td>{{ student.sclass }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <a href="#"><button type="button" class="btn btn-primary col-sm-offset-1 text-center">Update</button></a>
+            <a href="#"><button type="button" class="btn btn-primary col-sm-offset-3 text-center">Delete</button></a>
+        </div>
+        <br><br>
+        {% else %}
+            <p>No student to display <br></p>
+            <p>We're terribly sorry.</p>
+        {% endif %}
+    </div>
+{% endblock content %}

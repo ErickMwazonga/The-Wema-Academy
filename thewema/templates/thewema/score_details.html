@@ -1,0 +1,64 @@
+{% extends "thewema/base.html" %}
+
+{% block title %}Score Details{{ block.super }}{% endblock %}
+
+{% load score_tags %}
+
+{% block content %}
+    <div class="container">
+        {% with student_scores_list.first as score_list %}
+            <h3 class="text-center"><strong>{{ score_list.student.full_name }}</strong></h3>
+            <h4 class="text-center"><strong>Exam: {{ score_list.exam.term }} | {{ score_list.exam.etype }}</strong></h4>
+            <br/>
+            <div class="col-md-3">
+                <img src="{{ score_list.student.image.url }}" class="img-circle" alt="student image" width="200" height="200">
+            </div>
+
+            <div class="col-md-6">
+                <div>
+                    <h4><strong>Student Details</strong></h4>
+                    <p>Admission No: {{ score_list.student.admin_no }}</p>
+                    <p>Gender: {{ score_list.student.gender }}</p>
+                    <p>Standard: {{ score_list.student.sclass.standard }}</p>
+                    <p>Year: {{ score_list.student.sclass.year }}</p>
+                </div>
+            {% endwith %}
+                <div>
+                    <br/>
+                    <h4><strong>Student Results</strong></h4>
+                    <table class="table table-bordered ">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Subject</th>
+                                <th>Marks</th>
+                                <th>Grade</th>
+                                <th>Remarks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for score in student_scores_list %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ score.subject.name }}</td>
+                                <td>{{ score.marks }}</td>
+                                <td>{{ score.marks|grade }}</td>
+                                <td>{{ score.marks|score_remarks }}</td>
+                            </tr>
+                            {% endfor %}
+                            <tr>
+                                <td></td>
+                                <td><h4><strong>Total</strong></h4></td>
+                                <td><h4><strong>{{ total.total }}</strong></h4></td>
+                                <td><h4><strong>{{ total.total|mean }}</strong></h4></td>
+                                <td><h4><strong>{{ total.total|mean_remarks }}</strong></h4></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <a href="#"><button type="button" class="btn btn-primary col-sm-offset-1 text-center">Update</button></a>
+                <a href="#"><button type="button" class="btn btn-primary col-sm-offset-3 text-center">Delete</button></a>
+            </div>
+            <br><br>
+    </div>
+{% endblock content %}

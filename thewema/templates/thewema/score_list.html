@@ -1,0 +1,53 @@
+{% extends 'thewema/base.html' %}
+
+{% block title %} Students {{ block.super }}{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        <div class="container text-center">
+            {% include 'thewema/includes/_success_message.html' %}
+        </div>
+        <div class="text-center jumbotron">
+            <h3 class="text-center"><strong>Scores</strong></h3>
+            {% include "thewema/includes/_score_search.html" %}
+        </div>
+        <div class="container jumbotron">
+            {% if score_list %}
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Admission Number</th>
+                            <th>Name</th>
+                            <th>Standard</th>
+                            <th>Year</th>
+                            <th>Term</th>
+                            <th>Type</th>
+                            <th>Subject</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for score in score_list %}
+                            <tr>
+                                <th scope="row">{{ forloop.counter }}</th>
+                                <td><a href="{% url 'thewema:score_detail' pk=score.student.pk %}">{{ score.student.admin_no }}</a></td>
+                                <td>{{ score.student.full_name }}</td>
+                                <td>{{ score.student.sclass.standard }}</td>
+                                <td>{{ score.student.sclass.year }}</td>
+                                <td>{{ score.exam.term }}</td>
+                                <td>{{ score.exam.etype }}</td>
+                                <td>{{ score.subject.name }}</td>
+                                <td>{{ score.marks }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% include "thewema/includes/_pagination.html" %}
+            {% else %}
+                <p class="text-center">No Scores for display. We're terribly sorry.</p>
+                <a href="{% url 'thewema:score' %}"><p class="text-center">Add Scores</p></a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,39 @@
+{% extends 'thewema/base.html' %}
+
+{% block title %} Classes {{ block.super }}{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        <div class="container text-center">
+            {% include 'thewema/includes/_success_message.html' %}
+        </div>
+        <div class="container jumbotron">
+            {% if studentclass_list %}
+                <h3 class="text-center"><strong>Classes</strong></h3>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Standard</th>
+                            <th>Year</th>
+                            <th>Class Teacher</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for studentclass in studentclass_list %}
+                            <tr>
+                                <th scope="row">{{ forloop.counter }}</th>
+                                <td><a href="#">{{ studentclass.standard }}</a></td>
+                                <td>{{ studentclass.year }}</td>
+                                <td>{{ studentclass.teacher }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p class="text-center">No Classes for display. We're terribly sorry</p>
+                <a href="{% url 'thewema:student' %}"><p class="text-center">Add a Class</p></a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}

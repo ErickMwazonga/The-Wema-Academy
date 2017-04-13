@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load staticfiles %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="{% static 'thewema/css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'thewema/css/bootstrap.united.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'thewema/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'thewema/css/style.css' %}" type="text/css">
+    {# <link rel="stylesheet" type="text/css" href="{% static 'thewema/style.css' %}"/> #}
+    <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+    <title>{% block title %} | Wema Academy {% endblock title %}</title>
+</head>
+<body>
+    <div class="container-fluid">
+      <div class="navbar-wrapper">
+
+        <nav class="navbar navbar-inverse">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="{% url 'thewema:index' %}">The Wema Academy</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="{% url 'thewema:index' %}">Home</a></li>
+                <li><a href="{% url 'thewema:students' %}">Students</a></li>
+                <li><a href="{% url 'thewema:classes' %}">Classes</a></li>
+                <li><a href="{% url 'thewema:scores' %}">Scores</a></li>
+                <li class="nav navbar-nav">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Add <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="{% url 'thewema:student' %}">Student</a></li>
+                    <li><a href="{% url 'thewema:sclass' %}">Class</a></li>
+                    <li><a href="{% url 'thewema:exam' %}">Exam</a></li>
+                    <li><a href="{% url 'thewema:score' %}">Score</a></li>
+                    <li><a href="{% url 'thewema:feedback' %}">FeedBack</a></li>
+                  </ul>
+                </li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'thewema:logout' %}">{{ user.username }}| Logout</a></li>
+                    {% else %}
+                        <li><a href="{% url 'thewema:login' %}">Login</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    {% block content %}
+    {% endblock content %}
+
+    <footer id="footer" class="text-center">
+        Copyright &copy;2017 The Wema Academy All Rights Reserved<br/>By Lolany
+    </footer>
+    <!-- All the link to js scripts to come last. -->
+    <script src="{% static 'thewema/js/jquery.min.js' %}"></script>
+    <script src="{% static 'thewema/js/bootstrap.min.js' %}"></script>
+
+</body>
+</html>

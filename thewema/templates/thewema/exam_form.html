@@ -1,0 +1,18 @@
+{% extends "thewema/base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Exam {{ block.super }}{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        <div class="col-md-6 col-md-offset-3 jumbotron">
+            <h3 class="text-center"><strong>Enter Exam Details</strong></h3>
+            <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button class="btn btn-primary" type="submit" name="button">Save</button>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

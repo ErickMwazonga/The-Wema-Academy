@@ -1,0 +1,18 @@
+1. Use django's messaging app to notify users of the changes they make.
+    Refer to the documentation, on how to use the SuccessMessageMixin. Refer to my code to.
+    Also look how to integrate the messages in the template in my code or just google.
+
+2. Write a custom filter to filter the marks into grades.
+  It should be something like this {{ student.kcpe_marks|grade }} where grade is your
+  custom filter.
+  Refer to the docs.
+
+ 3. Look on how to use django's built in user authentication.
+    Implement a login page
+    Restrict views to logged users only.(using Django's LoginRequiredMixin)
+        Refer to my code.
+    This may take sometime to do
+
+
+NB. You may need to google on what are mixins in python  because Django makes
+extensive use of them.

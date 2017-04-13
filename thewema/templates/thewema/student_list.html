@@ -1,0 +1,52 @@
+{% extends 'thewema/base.html' %}
+
+{% block title %} Students {{ block.super }}{% endblock title %}
+
+{% block content %}
+    <div class="container text-center">
+        {% include 'thewema/includes/_success_message.html' %}
+    </div>
+    <div class="container">
+        <!-- order students according to class -->
+        <div class="text-center jumbotron">
+            <h3 class="text-center"><strong>Class Student List</strong></h3>
+            {% include "thewema/includes/_student_search.html" %}
+        </div>
+        <div class="container jumbotron">
+            {% if student_list %}
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Admission Number</th>
+                            <th>First Name</th>
+                            <th>Middle Name</th>
+                            <th>Surname</th>
+                            <th>Gender</th>
+                            <th>Date of Birth</th>
+                            <th>Class</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for student in student_list %}
+                            <tr>
+                                <th scope="row">{{ forloop.counter }}</th>
+                                <td><a href="{% url 'thewema:student_detail' pk=student.id %}">{{ student.admin_no }}</a></td>
+                                <td>{{ student.first_name }}</td>
+                                <td>{{ student.middle_name }}</td>
+                                <td>{{ student.surname }}</td>
+                                <td>{{ student.gender }}</td>
+                                <td>{{ student.dob }}</td>
+                                <td>{{ student.sclass }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% include "thewema/includes/_pagination.html" %}
+            {% else %}
+                <p class="text-center">No Students for display. We're terribly sorry.</p>
+                <a href="{% url 'thewema:student' %}"><p class="text-center">Add a Student</p></a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}
